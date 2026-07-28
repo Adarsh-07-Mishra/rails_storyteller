@@ -19,7 +19,35 @@
       </span>
     </div>
 
-    <hr class="my-6">
+    <% if @project.repository.present? %>
+
+      <hr class="my-6">
+
+      <div class="grid grid-cols-2 gap-4">
+
+        <div>
+          <strong>Default Branch</strong><br>
+          <%= @project.repository.default_branch %>
+        </div>
+
+        <div>
+          <strong>Total Commits</strong><br>
+          <%= number_with_delimiter(@project.repository.commit_count) %>
+        </div>
+
+        <div>
+          <strong>HEAD SHA</strong><br>
+          <code><%= @project.repository.head_sha.first(10) %></code>
+        </div>
+
+        <div>
+          <strong>Repository Size</strong><br>
+          <%= number_to_human_size(@project.repository.repository_size) %>
+        </div>
+
+      </div>
+
+    <% end %>
 
     <%= button_to "Analyze Repository",
           analyze_project_path(@project),
