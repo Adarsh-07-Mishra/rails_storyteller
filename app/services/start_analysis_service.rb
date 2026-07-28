@@ -10,11 +10,13 @@ class StartAnalysisService
 
     metadata = Git::MetadataExtractor.call(project)
 
-    Git::RepositoryPersister.call(project, metadata)
+    repository = Git::RepositoryPersister.call(project, metadata)
 
     project.update!(
       default_branch: metadata[:default_branch]
     )
+
+    Git::CommitImporter.call(repository)
 
     project.completed!
   rescue StandardError => e

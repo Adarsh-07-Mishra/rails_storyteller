@@ -1,20 +1,34 @@
+require "open3"
+
 module Git
   class CommandRunner
     class CommandFailed < StandardError; end
 
     def self.run(*command, chdir: nil)
-      output = +""
+      options = {}
+      options[:chdir] = chdir.to_s if chdir.present?
 
-      status = nil
+      stdout, stderr, status = Open3.capture3(
+        *command,
+        **options
+      )
 
-      Dir.chdir(chdir || Dir.pwd) do
-        output = `#{command.join(" ")} 2>&1`
-        status = $?
+      unless status.success?
+        raise CommandFailed, <<~ERROR
+          Command Failed
+
+          Command:
+          #{command.join(" ")}
+
+          Directory:
+          #{chdir || Dir.pwd}
+
+          Error:
+          #{stderr}
+        ERROR
       end
 
-      raise CommandFailed, output unless status.success?
-
-      output.strip
+      stdout.strip
     end
   end
 end

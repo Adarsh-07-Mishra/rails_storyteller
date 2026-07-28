@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  repository: one
+  sha: MyString
+  author_name: MyString
+  author_email: MyString
+  message: MyText
+  committed_at: 2026-07-29 04:24:55
+
+two:
+  repository: two
+  sha: MyString
+  author_name: MyString
+  author_email: MyString
+  message: MyText
+  committed_at: 2026-07-29 04:24:55
