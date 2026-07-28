@@ -5,6 +5,14 @@ class StartAnalysisService
 
   def call
     project.analyzing!
+
+    Git::RepositoryCloner.call(project)
+
+    project.completed!
+  rescue StandardError => e
+    project.failed!
+
+    Rails.logger.error(e.message)
   end
 
   private
