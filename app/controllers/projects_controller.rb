@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show]
+  before_action :set_project, only: %i[show analyze]
 
   def index
     @projects = Project.order(created_at: :desc)
@@ -21,6 +21,15 @@ class ProjectsController < ApplicationController
 
   def show
   end
+
+  def analyze
+  @project = Project.find(params[:id])
+
+  StartAnalysisService.new(@project).call
+
+  redirect_to @project,
+              notice: "Repository analysis started."
+end
 
   private
 

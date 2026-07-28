@@ -13,5 +13,9 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "projects#index"
 
-  resources :projects, only: %i[index new create show]
+  resources :projects, only: %i[index new create show] do
+    member do
+      post :analyze
+    end
+  end
 end

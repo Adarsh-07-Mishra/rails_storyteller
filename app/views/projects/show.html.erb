@@ -8,25 +8,23 @@
 
     <p class="mb-4">
       <strong>Repository:</strong>
-
       <%= @project.github_url %>
     </p>
 
-    <p class="mb-4">
+    <div class="mb-4">
       <strong>Status:</strong>
 
-      <%= @project.status.capitalize %>
-    </p>
+      <span class="<%= project_status_class(@project) %> px-3 py-1 rounded-full ml-2">
+        <%= @project.status.titleize %>
+      </span>
+    </div>
 
     <hr class="my-6">
 
-    <button
-      disabled
-      class="bg-gray-300 text-gray-700 px-5 py-3 rounded-lg cursor-not-allowed">
-
-      Analyze Repository (Coming Soon)
-
-    </button>
+    <%= button_to "Analyze Repository",
+          analyze_project_path(@project),
+          method: :post,
+          class: "bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-3 rounded-lg" %>
 
   </div>
 
