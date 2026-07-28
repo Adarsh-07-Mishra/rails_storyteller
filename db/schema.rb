@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_07_28_212122) do
+ActiveRecord::Schema[8.0].define(version: 2026_07_28_214151) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -23,4 +23,18 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_28_212122) do
     t.datetime "updated_at", null: false
     t.index ["github_url"], name: "index_projects_on_github_url", unique: true
   end
+
+  create_table "repositories", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.string "local_path"
+    t.string "default_branch"
+    t.string "head_sha"
+    t.integer "commit_count", default: 0
+    t.integer "repository_size", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_repositories_on_project_id"
+  end
+
+  add_foreign_key "repositories", "projects"
 end

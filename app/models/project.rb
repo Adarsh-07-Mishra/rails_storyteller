@@ -1,10 +1,13 @@
 class Project < ApplicationRecord
-  enum :status, {
-    pending: 0,
-    analyzing: 1,
-    completed: 2,
-    failed: 3
-  }
+  has_one :repository, dependent: :destroy
+
+  enum :status,
+       {
+         pending: 0,
+         analyzing: 1,
+         completed: 2,
+         failed: 3
+       }
 
   validates :name, presence: true
 

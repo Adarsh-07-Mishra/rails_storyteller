@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project: one
+  local_path: MyString
+  default_branch: MyString
+  head_sha: MyString
+  commit_count: 1
+  repository_size: 1
+
+two:
+  project: two
+  local_path: MyString
+  default_branch: MyString
+  head_sha: MyString
+  commit_count: 1
+  repository_size: 1
