@@ -20,6 +20,8 @@ class StartAnalysisService
 
     Git::CommitFileImporter.call(repository)
 
+    Analysis::ArchitectureAnalyzer.call(repository)
+
     project.completed!
   rescue StandardError => e
     project.failed!

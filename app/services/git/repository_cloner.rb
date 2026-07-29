@@ -32,7 +32,7 @@ module Git
         "git",
         "clone",
         "--quiet",
-        project.github_url,
+        project.github_url.to_s.strip,
         repository_path.to_s
       )
     end

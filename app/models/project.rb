@@ -14,4 +14,12 @@ class Project < ApplicationRecord
   validates :github_url,
             presence: true,
             uniqueness: true
+
+  before_validation :normalize_github_url
+
+  private
+
+  def normalize_github_url
+    self.github_url = github_url.to_s.strip
+  end
 end

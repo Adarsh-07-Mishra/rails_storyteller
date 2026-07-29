@@ -47,6 +47,24 @@
 
       </div>
 
+      <div class="mt-8 border rounded-lg p-4">
+        <h2 class="text-xl font-semibold mb-3">Architecture Overview</h2>
+
+        <p>
+          Total Commits:
+          <strong>
+            <%= number_with_delimiter(@project.repository.commits.count) %>
+          </strong>
+        </p>
+
+        <p>
+          Architecture Commits:
+          <strong>
+            <%= number_with_delimiter(@project.repository.commits.where(architecture_change: true).count) %>
+          </strong>
+        </p>
+      </div>
+
     <% end %>
 
     <%= button_to "Analyze Repository",
